@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Navya</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+    background:
+    radial-gradient(circle at 20% 20%, #ffd6e7, transparent 40%),
+    radial-gradient(circle at 80% 30%, #ffc2db, transparent 40%),
+    radial-gradient(circle at 50% 80%, #ffb3d2, transparent 40%),
+    linear-gradient(135deg,#ffe4f1,#ffd6ea);
+}
+
+/* Screen */
+.screen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* Party flag banner */
+.banner{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+}
+
+.flag{
+    width:55px;
+    height:65px;
+    background:#fff;
+    clip-path:polygon(0 0,100% 0,100% 75%,50% 100%,0 75%);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Pacifico',cursive;
+    color:#ff6fa5;
+    font-size:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    animation:drop 0.7s ease forwards;
+    opacity:0;
+}
+
+@keyframes drop{
+    from{transform:translateY(-80px);}
+    to{transform:translateY(0);opacity:1;}
+}
+
+/* Balloons */
+.balloon{
+    position:absolute;
+    font-size:30px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-20vh);}
+}
+
+/* Clouds */
+.cloud{
+    position:absolute;
+    font-size:60px;
+    opacity:0.7;
+    animation:cloudMove 40s linear infinite;
+}
+
+@keyframes cloudMove{
+    from{transform:translateX(-20vw);}
+    to{transform:translateX(120vw);}
+}
+
+/* Cupcake */
+.cupcake{
+    font-size:90px;
+    cursor:pointer;
+    animation:bounce 1.5s infinite;
+}
+@keyframes bounce{50%{transform:translateY(-10px);}}
+
+/* Flame */
+.flame{font-size:26px;margin-bottom:-15px;}
+
+/* Instagram-style card */
+.card{
+    width:90vw;
+    max-width:340px;
+    background:white;
+    padding:20px;
+    border-radius:22px;
+    box-shadow:0 12px 35px rgba(0,0,0,0.15);
+    text-align:center;
+}
+
+.photo{
+    width:100%;
+    border-radius:16px;
+    margin-top:10px;
+}
+
+/* Glitter particles */
+.glitter{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:#fff;
+    border-radius:50%;
+    animation:glow 1s forwards;
+}
+
+@keyframes glow{
+    to{opacity:0; transform:scale(2);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Cupcake screen -->
+<div class="screen" id="cupcakeScreen">
+    <div class="flame" id="flame">🕯</div>
+    <div class="cupcake" onclick="blowCandle()">🧁</div>
+    <p>Tap the cupcake</p>
+</div>
+
+<!-- Final screen -->
+<div class="screen" id="cardScreen" style="display:none;">
+
+    <!-- Banner -->
+    <div class="banner">
+        <div class="flag" style="animation-delay:0.1s">H</div>
+        <div class="flag" style="animation-delay:0.2s">B</div>
+        <div class="flag" style="animation-delay:0.3s">N</div>
+    </div>
+
+    <div class="card">
+        <h2 style="font-family:'Pacifico';color:#ff6fa5;">
+            Happy Birthday Navya
+        </h2>
+
+        <p>
+        You make everything softer, brighter,
+        and more beautiful just by being you.
+        Never stop shining ✨
+        </p>
+
+        <img src="navya.jpg" class="photo">
+    </div>
+
+</div>
+
+<audio autoplay loop>
+<source src="happybirthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* Cupcake interaction */
+function blowCandle(){
+    document.getElementById("flame").innerHTML="";
+    document.getElementById("cupcakeScreen").style.display="none";
+    document.getElementById("cardScreen").style.display="flex";
+
+    createBalloons();
+    createClouds();
+}
+
+/* Balloons tied near Navya text */
+function createBalloons(){
+    for(let i=0;i<6;i++){
+        let b=document.createElement("div");
+        b.classList.add("balloon");
+        b.innerHTML="🎈";
+        b.style.left=(40+Math.random()*20)+"vw";
+        b.style.animationDuration=(Math.random()*3+5)+"s";
+        document.body.appendChild(b);
+    }
+}
+
+/* Floating clouds */
+function createClouds(){
+    for(let i=0;i<3;i++){
+        let c=document.createElement("div");
+        c.classList.add("cloud");
+        c.innerHTML="☁";
+        c.style.top=(Math.random()*40)+"vh";
+        document.body.appendChild(c);
+    }
+}
+
+/* Pink glitter cursor */
+document.addEventListener("mousemove",(e)=>{
+    let g=document.createElement("div");
+    g.classList.add("glitter");
+    g.style.left=e.clientX+"px";
+    g.style.top=e.clientY+"px";
+    document.body.appendChild(g);
+    setTimeout(()=>g.remove(),1000);
+});
+
+</script>
+
+</body>
+</html>
+
+
